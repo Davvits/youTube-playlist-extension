@@ -4,9 +4,12 @@ export default function () {
 
     //Container do painel da Playlist (como um todo)
     var container_painel = null;
+
     document.querySelectorAll("#container").forEach(container => {
         if(container.classList.contains("ytd-playlist-panel-renderer")) container_painel = container;
     });
+
+
     //container com os videos (dentro do painel)
     var container_videos = null;
     container_painel.querySelectorAll("#items").forEach(item => {
@@ -17,6 +20,7 @@ export default function () {
     var videos_container = container_videos.querySelectorAll("#container");
     //array que vai ser retornado com um a array de obj do tipo video
     var array_videos = []
+
     //Iterar sobre os videos somando os segundos de cada video e add um tipo video no array    
     for(var video of videos_container){
         var timeStamp_container = video.querySelector('#text');
@@ -28,55 +32,27 @@ export default function () {
         //converte o timestamp em segundo e soma ao "full"
         increaseTime(timeStamp_array);
         
-        
-        array_videos.push(createVideo(title,timeStamp_container.innerText))
-        //console.log(timeStamp);
+        // boleano se diz que x video está sendo assistido
+        current_video = video.parentElement.parentElement.hasAttribute("selected");
+
+        array_videos.push(createVideo(title,timeStamp_container.innerText,current_video));
     }
-    console.log(array_videos)
-    return []
-    //var videosOnPlaylist = playlistVideos.querySelectorAll('.ytd-thumbnail-overlay-time-status-renderer');
 
-   
 
-/*
+    var playlist_title = container_painel.querySelector("yt-formatted-string").innerText;
+    console.log(playlist_title,array_videos)
 
-    for(var video of videosOnPlaylist){
-        //console.log(video)
-        if(!video.classList.contains('ytd-thumbnail-overlay-time-status-renderer'))continue;
+    return {
+        playlist_title,
+        array_videos,
+        seconds : full
 
-        var timeVideo = video.innerText.match(/\d+/g);
-        if(timeVideo === null)continue
-        
-
-        const arrayTimes = []
-        // Converte o timeVideo(Objeto) para array
-        for (let i of timeVideo) {
-            arrayTimes.push(i)
-        }
-         console.log(arrayTimes)
-        var a = arrayTimes.pop()
-        var b = arrayTimes.pop()
-        var c = arrayTimes.pop()
-
-       
-        if(a) full+= Number(a)
-        if(b) full+= Number(b) * 60
-        if(c) full+= Number(c) * 60 * 60
-
-  
-        //console.log(timeVideo, typeof timeVideo);
-        sec = Math.floor(full % 60) 
-        min = Math.floor(full / 60 % 60) 
-        hour = Math.floor(full / 60 / 60)
-        
     }
-    return [hour,min,sec,{full}]
 
 
-    function x () {
-        console.log("teeeeeeeeeeeeeeeeeeeeeeee")
-    }
-    */
+    //Funçõoes Uteis
+
+
    function createVideo(nome,time,active){
         return {
             nome,
