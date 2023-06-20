@@ -4,6 +4,7 @@ import Playlist from "./scripts/models/Playlist.js";
 const btn = document.querySelector("#btn")
 const timer = document.querySelector("#timer")
 const title = document.querySelector("#pl-name")
+const timeLeft = document.querySelector("#time-left")
 
 btn.addEventListener("click", async ()=>{
     console.log("test")
@@ -26,6 +27,7 @@ btn.addEventListener("click", async ()=>{
 function updatePopup(playlist) {
     timer.innerText = playlist.time
     title.innerText = playlist.name
+    timeLeft.innerText = playlist.getTimeLeft();
 }
 
 

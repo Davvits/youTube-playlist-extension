@@ -29,6 +29,7 @@ export default function () {
         var timeStamp_object = timeStamp_container.innerText.match(/\d+/g);
 
         var timeStamp_array = toArray(timeStamp_object);
+
         //converte o timestamp em segundo e soma ao "full"
         increaseTime(timeStamp_array);
         

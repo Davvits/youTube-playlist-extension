@@ -4,6 +4,7 @@ export default class Playlist {
         this.name = name;
         this.videos = videos;
         this.time = this.getTime(seconds);
+        this.seconds = seconds;
     }
 
     getTime (seconds) {
@@ -18,7 +19,47 @@ export default class Playlist {
         return `${h}:${min}:${seg}`;
     }
 
+    getTimeLeft() {
+        let sec = 0;
+        for(let video of this.videos){
+            if(video.active) return this.getTime(this.seconds - sec);
+            const timeArray = video.time.match(/\d+/g);;
+            
+            sec += increaseTime([...timeArray],sec);
+            console.log(timeArray)
+        }
+        return this.getTime(this.seconds - sec);
+    }
+
+
+       
+
 }
+
+function toArray (obj) {
+    var array = []
+
+        for (let i of obj) {
+            array.push(i)
+        }
+
+        return array;
+   }
+
+   function increaseTime(arranjo){
+    let count = 0;
+    console.log("aqui;>",arranjo)
+    let a = arranjo.pop()
+    let b = arranjo.pop()
+    let c = arranjo.pop()
+
+   
+    if(a) count+= Number(a)
+    if(b) count+= Number(b) * 60
+    if(c) count+= Number(c) * 60 * 60
+
+    return count;
+   }
 
 const p = new Playlist("Putx",null,11853);
 
