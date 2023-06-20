@@ -18,15 +18,19 @@ export default class Playlist {
 
         return `${h}:${min}:${seg}`;
     }
-
+    getCurrentVideo(){
+        for(let video of this.videos){
+            if (video.active)return video;
+        }
+    }
     getTimeLeft() {
         let sec = 0;
         for(let video of this.videos){
+            console.log(video.index)
             if(video.active) return this.getTime(this.seconds - sec);
             const timeArray = video.time.match(/\d+/g);;
             
             sec += increaseTime([...timeArray],sec);
-            console.log(timeArray)
         }
         return this.getTime(this.seconds - sec);
     }

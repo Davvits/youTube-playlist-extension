@@ -2,6 +2,9 @@ export default function () {
     //vai armazenar o total de segundos de uma playlist
     var full = 0
 
+    //Conta a posição de cada video
+    var index = 1;
+
     //Container do painel da Playlist (como um todo)
     var container_painel = null;
 
@@ -25,6 +28,9 @@ export default function () {
     for(var video of videos_container){
         var timeStamp_container = video.querySelector('#text');
         var title = video.querySelector("#video-title").title;
+        
+        // Pegar o Thumbnail do video
+        var url_img  = video.querySelector("img").getAttribute("src");
         //remove não digitos do timestamp
         var timeStamp_object = timeStamp_container.innerText.match(/\d+/g);
 
@@ -36,13 +42,16 @@ export default function () {
         // boleano se diz que x video está sendo assistido
         current_video = video.parentElement.parentElement.hasAttribute("selected");
 
-        array_videos.push(createVideo(title,timeStamp_container.innerText,current_video));
+        //console.log(video.querySelector("img"),video.querySelector("img").getAttribute("src"))
+        array_videos.push(createVideo(index,title,timeStamp_container.innerText,url_img,current_video));
+
+        index++
     }
 
 
     var playlist_title = container_painel.querySelector("yt-formatted-string").innerText;
-    console.log(playlist_title,array_videos)
-
+    
+    
     return {
         playlist_title,
         array_videos,
@@ -54,10 +63,12 @@ export default function () {
     //Funçõoes Uteis
 
 
-   function createVideo(nome,time,active){
+   function createVideo(index,nome,time,thumbnail,active){
         return {
+            index,
             nome,
             time,
+            thumbnail,
             active
         }
    }

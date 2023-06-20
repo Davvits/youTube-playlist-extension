@@ -5,19 +5,20 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <h1>Youtube Playlist</h1>
+    <h1 class="title">Youtube Playlist</h1>
     <h2>Playlist: <span id="pl-name">Not-found</span></h2>
-    <p >Duração => <span id="timer"></span></p>
+    <p class="duration">Duração => <span id="timer"></span></p>
 
-    <button id="btn">Clique</button>
-
-    <div>
+    <div class="box-video">
       <h3>Tocando agora...</h3>
-      <img src="https://i.ytimg.com/vi/x6C82oGTkiY/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLD7sGM_6wTbjLcj7EEB35TdMXnz6g" alt="">
-      <p>2/20</p>
+
+      <img id="img"  src="https://i.ytimg.com/vi/x6C82oGTkiY/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLD7sGM_6wTbjLcj7EEB35TdMXnz6g" alt="">
+
+      <p id="name-music">Nome da musica</p>
+      <p id="index-videos">2/20</p>
     </div>
     
-    <h3>Tempo restante: <span id="time-left"> xxx </span></h3>
+    <h3 class="leftTime">Tempo restante: <span id="time-left"> xxx </span></h3>
     <script src="./index.js" type="module"></script>
   </body>
 </html>
